@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+#wrap {
+	width:600px;
+	margin:auto;
+}
+
+header {
+	height:70px;
+	background-color:#9370DB;
+}
+
+footer {
+	height:30px;
+	background-color:#9370DB;
+}
+
+.join-box {
+	width:400px;
+}
