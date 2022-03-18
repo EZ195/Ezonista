@@ -18,9 +18,9 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		
-		<section>
-			<div>
-				<h1>회원가입</h1>
+		<section class="d-flex justify-content-center">
+			<div class="join-box my-5">
+				<h1 class="text-center">회원가입</h1>
 				
 				<input type="text" id="loginIdInput" class="form-control mt-3" placeholder="아이디">
 				<input type="password" id="pwInput" class="form-control mt-3" placeholder="비밀번호">
@@ -28,7 +28,7 @@
 				<input type="text" id="nameInput" class="form-control mt-3" placeholder="이름">
 				<input type="email" id="emailInput" class="form-control mt-3" placeholder="이메일">
 				
-				<button type="button" class="btn btn-info btn-block mt-3">회원가입</button>
+				<button type="button" id="joinBtn" class="btn btn-info btn-block mt-3">회원가입</button>
 				
 			</div>
 		</section>
@@ -36,6 +36,65 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 		
 	</div>
+	
+	<script>
+	
+	$(document).ready(function(){
+		
+		$("#joinBtn").on("click" , function(){
+			
+			let loginId = $("#loginIdInput").val();
+			let password = $("#pwInput").val();
+			let passwordCheck = $("#pwCheckInput").val();
+			let name = $("#nameInput").val();
+			let email = $("#emailInput").val();
+			
+			if(loginId == "") {
+				alert("아이디를 입력하세요!");
+				return;
+			}
+			
+			if(password == "") {
+				alert("비밀번호를 입력하세요!");
+				return;
+			}
+			
+			if(password != passwordCheck) {
+				alert("비밀번호를 확인해주세요");
+				return;
+			}
+			if (name == "") {
+				alert("이름을 입력하세요");
+				return;
+			}
+			
+			if (email == "") {
+				alert("이메일을 입력하세요");
+				return;
+			}
+			
+			$.ajax({
+				type:"post",
+				url:"/user/sign_up",
+				data:{"loginId":loginId,"password":password,"name":name,"email":email},
+				success:function(data){
+					if(data.result == "success") {
+						alert("회원가입 성공");
+					}
+					else {
+						alert("회원가입 실패");
+					}
+				},
+				error:function(){
+					alert("에러발생");
+				}
+			})
+		});
+		
+	});
+		
+	
+	</script>
 
 </body>
 </html>
