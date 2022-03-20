@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,7 +70,29 @@ public class UserRestController {
 		}
 		
 		return result;
+	}
+	
+	@GetMapping("/id_duplicate")
+	public Map<String, Boolean> idDuplicate(@RequestParam("loginId") String loginId) {
 		
+		boolean id_duplicate = userBO.idDuplicate(loginId);
+		
+		Map<String, Boolean> result = new HashMap<>();
+		result.put("idDuplicate", id_duplicate);
+		
+		return result;
+	}
+	
+	@GetMapping("/email_duplicate")
+	public Map<String, Boolean> emailDuplicate(@RequestParam("email") String email) {
+		
+		boolean email_duplicate = userBO.emailDuplicate(email);
+		
+		Map<String, Boolean> result = new HashMap<>();
+		
+		result.put("emailDuplicate",email_duplicate);
+		
+		return result;
 	}
 
 }

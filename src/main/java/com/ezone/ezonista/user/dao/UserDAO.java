@@ -19,4 +19,7 @@ public interface UserDAO {
 			@Param("password") String password);
 	
 	public int selectCountLoginId();
+	
+	public int idDuplicate(@Param("loginId") String loginId);
+	public int emailDuplicate(@Param("email") String email);
 }

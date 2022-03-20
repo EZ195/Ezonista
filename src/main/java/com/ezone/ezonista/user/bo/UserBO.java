@@ -29,6 +29,30 @@ public class UserBO {
 		String encryptPassword = EncryptUtills.md5(password);
 		
 		return userDAO.login(loginId, encryptPassword);
+	}
+	
+	public boolean idDuplicate(String loginId) {
+		
+		int count = userDAO.idDuplicate(loginId);
+		
+		// 중복 아닐 때 false
+		if (count == 0) {
+			return false;
+		}
+		// 중복일 때 true
+		else {
+			return true;
+		}
+	}
+	public boolean emailDuplicate(String email) {
+		
+		int count = userDAO.emailDuplicate(email);
+		if (count == 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
 		
 	}
 }

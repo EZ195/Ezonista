@@ -1,12 +1,13 @@
 @charset "UTF-8";
 
 #wrap {
-	width:600px;
+	width:900px;
+	height:1000px;
 	margin:auto;
 }
 
 header {
-	height:70px;
+	height:50px;
 	background-color:#9370DB;
 }
 
@@ -15,6 +16,32 @@ footer {
 	background-color:#9370DB;
 }
 
-.join-box {
-	width:400px;
+.logo-image {
+	width:300px;
+    height:300px;
+    float:left;
 }
+
+#loginForm {
+	width:300px;
+    height:300px;
+    float:right;
+}
+#idDuplication {
+	display:none;
+}
+
+#idNotDuplication {
+	display:none;
+}
+
+#emailDuplication {
+	display:none;
+}
+
+#emailNotDuplication {
+	display:none;
+}
+
+
+

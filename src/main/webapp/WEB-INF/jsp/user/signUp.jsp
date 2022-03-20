@@ -23,10 +23,16 @@
 				<h1 class="text-center">회원가입</h1>
 				
 				<input type="text" id="loginIdInput" class="form-control mt-3" placeholder="아이디">
+				<div id="idDuplication"><small class="text-danger">중복된 아이디 입니다.</small></div>
+				<div id="idNotDuplication"><small class="text-primary">사용 가능한 아이디 입니다.</small></div>
+				<button type="button" id="id_duplicate" class="btn btn-info btn-block">중복확인</button>
 				<input type="password" id="pwInput" class="form-control mt-3" placeholder="비밀번호">
 				<input type="password" id="pwCheckInput" class="form-control mt-3" placeholder="비밀번호 확인">
 				<input type="text" id="nameInput" class="form-control mt-3" placeholder="이름">
 				<input type="email" id="emailInput" class="form-control mt-3" placeholder="이메일">
+				<div id="emailDuplication"><small class="text-danger">중복된 이메일 입니다.</small></div>
+				<div id="emailNotDuplication"><small class="text-primary">사용 가능한 이메일 입니다.</small></div>
+				<button type="button" id="email_duplicate" class="btn btn-info btn-block">중복확인</button>
 				
 				<button type="button" id="joinBtn" class="btn btn-info btn-block mt-3">회원가입</button>
 				
@@ -39,7 +45,64 @@
 	
 	<script>
 	
-	$(document).ready(function(){
+	$().ready(function(){
+		
+		// id 중복 체크를 했는지 여부 저장 (false면 중복체크 안함/ true면 중복체크 했다는 의미)
+		var idChecked = false;
+		
+		// id가 중복된 상태인지 확인하는 변수 (true면 중복된 상태 의미) 
+		var idDuplicate = true;
+		
+		// 중복체크 후 id 입력 내용 수정 시 중복 체크 관련 값 초기화 및 관련 텍스트 숨기기
+		$("#loginIdInput").on("input" , function(){
+			
+			idChecked = false;
+			idDuplicate = true;
+			
+			$("#idDuplication").hide();
+			$("#idNotDuplication").hide();
+		});
+		
+		$("#id_duplicate").on("click" ,function(){
+			
+			let loginId = $("#loginIdInput").val();
+			
+			if (loginId == ""){
+				alert("아이디를 입력해주세요!");
+				return;
+			}
+			
+			$.ajax({
+				type:"get",
+				url:"/user/id_duplicate",
+				data:{"loginId":loginId},
+				
+				success:function(data){
+					
+					idChecked = true;
+					
+					$("#idDuplication").hide();
+					$("#idNotDuplication").hide();
+					
+					if(data.idDuplicate) {
+						$("#idDuplication").show();
+						return;
+					}
+					
+					else {
+						idDuplicate = false;
+						$("#idNotDuplication").show();
+					}
+					
+				},
+				error:function(){
+					alert("입력에러");
+				}
+				
+			});
+			
+			
+		});
 		
 		$("#joinBtn").on("click" , function(){
 			

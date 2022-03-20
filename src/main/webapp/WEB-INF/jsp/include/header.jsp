@@ -10,8 +10,8 @@
 	<header class="d-flex align-items-center">
 		<h1 class="ml-5">EZONISTA</h1>
 		
-		<c:if test="">
-			<div class>님이 로그인 중</div>
+		<c:if test="${not empty userId }">
+			<div class="mr-3">${userName }님이 로그인 중 <a href="/user/sign_out">로그아웃</a></div>
 		</c:if>
 	</header>
 

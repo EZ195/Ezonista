@@ -17,8 +17,9 @@
 
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
-		
+        
 		<section class="d-flex justify-content-center">
+		<img class="logo-image mr-5" src="/static/img/InstagramLogo.png" >
 			<form id=loginForm>
 				<div class="join-box my-5">
 				<h1 class="text-center">로그인</h1>
