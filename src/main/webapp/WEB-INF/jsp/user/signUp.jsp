@@ -85,8 +85,8 @@
 					$("#idNotDuplication").hide();
 					
 					if(data.idDuplicate) {
+						idDuplicate = true;
 						$("#idDuplication").show();
-						return;
 					}
 					
 					else {
@@ -133,6 +133,16 @@
 			
 			if (email == "") {
 				alert("이메일을 입력하세요");
+				return;
+			}
+			
+			if (idChecked == false) {
+				alert("아이디 중복체크를 해주세요");
+				return;
+			}
+			
+			if (idDuplicate == true) {
+				alert("아이디가 중복되었습니다")
 				return;
 			}
 			
