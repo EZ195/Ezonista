@@ -28,7 +28,8 @@
 	
 	<select id="login" parameterType="map" resultType="com.ezone.ezonista.user.model.User">
 		SELECT
-				`loginId`
+				`id`
+				,`loginId`
 				,`password`
 				,`name`
 				,`email`

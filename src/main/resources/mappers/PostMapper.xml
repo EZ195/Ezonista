@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezone.ezonista.post.dao.PostDAO">
+	<insert id="addPost" parameterType="map">
+		INSERT INTO `post`
+			(
+				`userId`
+				,`userName`
+				,`content`
+				,`imagePath`
+				,`createdAt`
+				,`updatedAt`
+			)
+		VALUE 
+			(
+				#{userId}
+				,#{userName}
+				,#{content}
+				,#{filePath}
+				,now()
+				,now()
+			)
+	</insert>
+	
+	<select id="showTimeline" parameterType="int" resultType="com.ezone.ezonista.post.model.Post">
+		SELECT
+				`id`
+				,`userId`
+				,`userName`
+				,`content`
+				,`imagePath`
+				,`createdAt`
+				,`updatedAt`
+		FROM
+				`post`
+	</select>
+</mapper>

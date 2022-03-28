@@ -47,13 +47,15 @@
 	
 	$().ready(function(){
 		
-		// id 중복 체크를 했는지 여부 저장 (false면 중복체크 안함/ true면 중복체크 했다는 의미)
+		// id, email 중복 체크를 했는지 여부 저장 (false면 중복체크 안함/ true면 중복체크 했다는 의미)
 		var idChecked = false;
+		var emailChecked = false;
 		
-		// id가 중복된 상태인지 확인하는 변수 (true면 중복된 상태 의미) 
+		// id, email이 중복된 상태인지 확인하는 변수 (true면 중복된 상태 의미) 
 		var idDuplicate = true;
+		var emailDuplicate = true;
 		
-		// 중복체크 후 id 입력 내용 수정 시 중복 체크 관련 값 초기화 및 관련 텍스트 숨기기
+		// 중복체크 후 id,email 입력 내용 수정 시 중복 체크 관련 값 초기화 및 관련 텍스트 숨기기
 		$("#loginIdInput").on("input" , function(){
 			
 			idChecked = false;
@@ -61,6 +63,15 @@
 			
 			$("#idDuplication").hide();
 			$("#idNotDuplication").hide();
+		});
+		
+		$("#emailInput").on("input" , function(){
+			
+			emailChecked = false;
+			emailDuplicate = true;
+			$("#emailDuplication").hide();
+			$("#emailNotDuplication").hide();
+			
 		});
 		
 		$("#id_duplicate").on("click" ,function(){
@@ -96,11 +107,45 @@
 					
 				},
 				error:function(){
-					alert("입력에러");
+					alert("에러 발생");
 				}
 				
 			});
 			
+			
+		});
+		
+		$("#email_duplicate").on("click",function(){
+			
+			let email = $("#emailInput").val();
+			
+			if(email == "") {
+				alert("이메일을 입력해주세요");
+				return;
+			}
+			
+			$.ajax({
+				type:"get",
+				url:"/user/email_duplicate",
+				data:{"email":email},
+				success:function(data){
+					
+					emailChecked = true;
+					
+					if(data.emailDuplicate){
+						emailDuplicate = true;
+						$("#emailDuplication").show();
+					}
+					else {
+						emailDuplicate = false;
+						$("#emailNotDuplication").show();
+					}
+				},
+				error:function(){
+					alert("에러 발생");
+				}
+				
+			});
 			
 		});
 		
@@ -137,12 +182,21 @@
 			}
 			
 			if (idChecked == false) {
-				alert("아이디 중복체크를 해주세요");
+				alert("아이디 중복체크를 확인해주세요");
 				return;
 			}
 			
 			if (idDuplicate == true) {
 				alert("아이디가 중복되었습니다")
+				return;
+			}
+			
+			if (emailChecked == false) {
+				alert("이메일 중복체크를 확인해주세요");
+				return;
+			}
+			if (emailDuplicate == true) {
+				alert("이메일이 중복되었습니다");
 				return;
 			}
 			
@@ -153,6 +207,7 @@
 				success:function(data){
 					if(data.result == "success") {
 						alert("회원가입 성공");
+						location.href = "/user/signin_view";
 					}
 					else {
 						alert("회원가입 실패");
@@ -161,7 +216,7 @@
 				error:function(){
 					alert("에러발생");
 				}
-			})
+			});
 		});
 		
 	});

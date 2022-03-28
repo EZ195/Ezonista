@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메모 쓰기</title>
+<title>게시글 작성</title>
 </head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -16,14 +16,69 @@
 <body>
 
 	<div id="wrap">
-		<c:import url="/WEB-INF/jsp/include/header.jsp"/><!-- WEB-INF부터 경로 입력 -->
+		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		
-		<section>
+		<section class="d-flex justify-content-center">
+		<div class="w-75 my-5">
+			<input type="file" class="mt-3" id="fileInput">
+			<textarea class="form-control mt-3" rows="10" cols="50" id="contentInput"></textarea>
+			<div class="d-flex justify-content-between mt-3">
+				<a href="/post/list_view" class="btn btn-info">목록으로</a>
+				<button type="button" id="saveBtn" class="btn btn-success">업로드</button>
+			</div>		
+		</div>
 		</section>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
-		
 	</div>
+	
+	<script>
+		$().ready(function(){
+			
+			$("#saveBtn").on("click" , function(){
+				
+				let content = $("#contentInput").val();
+				
+				if (content == "") {
+					alert("내용을 입력해주세요");
+					return;
+				}
+				
+				if($("#fileInput")[0].files.length == 0) {
+					alert("파일을 올려주세요");
+					return;
+				}
+					
+				// 여기의 키는 컨트롤러의 파라메타에서 지정한 키랑 이름이 동일해야함
+				var formData = new FormData();
+				formData.append("content",content);
+				formData.append("imagePath", $("#fileInput")[0].files[0]);
+				
+				$.ajax({
+					type:"post",
+					url:"/post/create",
+					data:formData,
+					enctype:"multipart/form-data",
+					processData:false,
+					contentType:false,
+					success:function(data) {
+						if(data.result == "success") {
+							alert("업로드 성공");
+						}
+						
+						else {
+							slert("업로드 실패");
+						}
+					},
+					error:function(){
+						alert("에러 발생");
+					}
+				
+				});
+				
+			});
+		});
+	</script>
 
 </body>
 </html>
