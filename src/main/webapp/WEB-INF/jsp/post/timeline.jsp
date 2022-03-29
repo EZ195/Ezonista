@@ -26,14 +26,53 @@
 			<textarea class="form-control mt-3" rows="5" cols="10" id="contentInput">${post.content}</textarea>
 			<br>
 			<label>댓글</label>
-			<input type="text" id="commentInput">
-			<button type="button" id="commentBtn" class="">댓글</button><br>
+			<c:forEach var="com" items="${comment }">
+				<label>${com.userName }</label><input type="text" value="${com.comment }">
+			</c:forEach>
+			<input type="text" class="form-control border-0" id="commentInput${post.id }">
+			<button type="button" data-post-id="${post.id }" class="btn btn-info ml-2 commentBtn">댓글</button><br>
 		</c:forEach>
 		</div>
 		</section>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	</div>
+	
+	<script>
+		$().ready(function(){
+			$(".commentBtn").on("click", function(){
+				
+				let postId = $(this).data("post-id");
+				
+				// Ex $("#commentInput4")
+				let comment = $("#commentInput" + postId).val();
+				if(comment == "") {
+					alert("댓글을 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					
+					type:"get",
+					url:"/post/comment/create",
+					data:{"postId":postId,"comment":comment},
+					success:function(data){
+						if(data.result == "success") {
+							alert("뎃글 작성 성공");
+						}
+						else {
+							alert("댓글 작성 실패");
+						}
+						
+					},
+					error:function(){
+						alert("에러 발생");
+					}
+					
+				});
+			});
+		});
+	</script>
 
 </body>
 </html>

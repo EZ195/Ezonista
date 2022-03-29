@@ -16,6 +16,6 @@ public interface PostDAO {
 			@Param("content") String content,
 			@Param("filePath") String filePath);
 	
-	public List<Post> showTimeline();
+	public List<Post> selectPostList();
 
 }
