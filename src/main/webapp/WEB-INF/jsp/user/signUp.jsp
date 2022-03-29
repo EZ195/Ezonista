@@ -17,30 +17,39 @@
 
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
-		
-		<section class="d-flex justify-content-center">
-			<div class="join-box my-5">
-				<h1 class="text-center">회원가입</h1>
-				
-				<input type="text" id="loginIdInput" class="form-control mt-3" placeholder="아이디">
-				<div id="idDuplication"><small class="text-danger">중복된 아이디 입니다.</small></div>
-				<div id="idNotDuplication"><small class="text-primary">사용 가능한 아이디 입니다.</small></div>
-				<button type="button" id="id_duplicate" class="btn btn-info btn-block">중복확인</button>
+		<section class="d-flex justify-content-center my-5">
+			<div class="join-box border px-3 py-3">
+				<div>
+					<h1 class="text-center">회원가입</h1>
+				</div>
+				<div class="d-flex mt-3">
+					<input type="text" id="loginIdInput" class="form-control mt-3" placeholder="아이디">
+					<div id="idDuplication"><small class="text-danger">중복된 아이디 입니다.</small></div>
+					<div id="idNotDuplication"><small class="text-primary">사용 가능한 아이디 입니다.</small></div>
+					<div class="d-flex  mt-3">
+						<button type="button" id="id_duplicate" class="btn btn-default btn-sm ml-2">중복확인</button>
+					</div>
+				</div>
 				<input type="password" id="pwInput" class="form-control mt-3" placeholder="비밀번호">
 				<input type="password" id="pwCheckInput" class="form-control mt-3" placeholder="비밀번호 확인">
 				<input type="text" id="nameInput" class="form-control mt-3" placeholder="이름">
-				<input type="email" id="emailInput" class="form-control mt-3" placeholder="이메일">
-				<div id="emailDuplication"><small class="text-danger">중복된 이메일 입니다.</small></div>
-				<div id="emailNotDuplication"><small class="text-primary">사용 가능한 이메일 입니다.</small></div>
-				<button type="button" id="email_duplicate" class="btn btn-info btn-block">중복확인</button>
-				
-				<button type="button" id="joinBtn" class="btn btn-info btn-block mt-3">회원가입</button>
-				
+				<div class="d-flex  mt-3">
+					<input type="email" id="emailInput" class="form-control mt-3" placeholder="이메일">
+					<div id="emailDuplication"><small class="text-danger">중복된 이메일 입니다.</small></div>
+					<div id="emailNotDuplication"><small class="text-primary">사용 가능한 이메일 입니다.</small></div>
+					<div class="d-flex mt-3">
+						<button type="button" id="email_duplicate" class="btn btn-default btn-sm ml-2">중복확인</button>
+					</div>
+				</div>
+				<div>
+					<button type="button" id="joinBtn" class="btn btn-block mt-3" style="background-color: #515bd4;">회원가입</button>
+				</div>
+				<div class="text-center mt-3">
+					<small>이미 가입했다면 <a href="/user/signin_view">로그인</a> 하러가기</small>
+				</div>
 			</div>
 		</section>
-		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
-		
 	</div>
 	
 	<script>

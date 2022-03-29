@@ -18,8 +18,11 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
         
-		<section class="d-flex justify-content-center">
-		<img class="logo-image mr-5" src="/static/img/InstagramLogo.png" >
+		<section class="d-flex justify-content-center my-5">
+        <div class="mr-5">
+        	<img class="logo-image mr-5" src="/static/img/InstagramLogo.png" >
+        </div>
+        <div>
 			<form id=loginForm>
 				<div class="join-box my-5">
 				<h1 class="text-center">로그인</h1>
@@ -27,8 +30,12 @@
 					<input type="password" id="pw" class="form-control mt-3" placeholder="비밀번호">
 					
 					<button type="submit" id="loginBtn" class="btn btn-info btn-block mt-3">로그인</button>
+					<div class="text-center mt-3">
+						<small>아직 계정이 없다면? <a href="/user/signup_view">가입하기</a></small>
+					</div>
 				</div>
-			</form>
+			</form>  
+        </div>
 		</section>
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	</div>

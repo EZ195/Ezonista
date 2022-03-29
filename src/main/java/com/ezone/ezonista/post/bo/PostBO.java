@@ -33,7 +33,9 @@ public class PostBO {
 	public List<PostDetail> getPostList() {
 		
 		List<Post> postList = postDAO.showTimeline();
+		return
 		
 	}
-*/
+	*/
+	
 }

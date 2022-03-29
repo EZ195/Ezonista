@@ -23,7 +23,7 @@
 			<input type="file" class="mt-3" id="fileInput">
 			<textarea class="form-control mt-3" rows="10" cols="50" id="contentInput"></textarea>
 			<div class="d-flex justify-content-between mt-3">
-				<a href="/post/list_view" class="btn btn-info">목록으로</a>
+				<a href="/post/timeline" class="btn btn-info">목록으로</a>
 				<button type="button" id="saveBtn" class="btn btn-success">업로드</button>
 			</div>		
 		</div>

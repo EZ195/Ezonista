@@ -8,11 +8,12 @@
 </head>
 <body>
 	<header class="d-flex align-items-center justify-content-between">
-		<h1 class="ml-5">EZONISTA</h1>
-		
+		<h1 class="ml-5 font-weight-bold">EZONISTA</h1>
+		<div>
 		<c:if test="${not empty userId }">
-			<div class="mr-3 bg-danger">${userName }님이 로그인 중 <a href="/user/sign_out">로그아웃</a></div>
+			<div class="mr-3 font-weight-bold">${userName }님이 로그인 중 <a href="/user/sign_out">로그아웃</a></div>
 		</c:if>
+		</div>
 	</header>
 
 </body>

@@ -33,7 +33,7 @@ public class UserController {
 		session.removeAttribute("userLoginId");
 		session.removeAttribute("userName");
 		
-		return "/user/logout";
+		return "redirect:/user/signin_view";
 		
 	}
 }

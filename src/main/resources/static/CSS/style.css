@@ -8,12 +8,14 @@
 
 header {
 	height:50px;
-	background-color:#9370DB;
+	background-color:#515bd4;
+	color:white;
 }
 
 footer {
 	height:30px;
-	background-color:#9370DB;
+	background-color:#515bd4;
+	color:white;
 }
 
 .logo-image {
@@ -41,6 +43,14 @@ footer {
 
 #emailNotDuplication {
 	display:none;
+}
+.create-icon{
+	float:right;
+}
+.bi-pencil-square{
+    font-size: 50px;
+    line-height: 50px;
+    color: #515bd4;
 }
 
 

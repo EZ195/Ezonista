@@ -19,26 +19,45 @@
 	<div id="wrap">
 	<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		
+		<div class="create-icon mb-1 mt-1">
+			<a href="/post/create_view"><i class="bi-pencil-square"></i></a>
+		</div>
 		<section class="d-flex justify-content-center">
-		<div class="w-75 my-5">
-		<c:forEach var="post" items="${post }">
-			<label class="bg-primary">${post.userName }</label><br>
-			<img width="600px" height="600px" src="${post.imagePath }">
-			<textarea class="form-control mt-3" rows="5" cols="10" id="contentInput">${post.content}</textarea>
-			<br>
-			<div class="m-2">
-				<a href="#" class="likeBtn" data-post-id="${post.id }"><i class="bi bi-heart heart-icon text-dark"></i></a>
-						
-				<span class="middle-size ml-1"> 개</span>
+			<div class="w-75 my-5 ">
+			<div>
+				<c:forEach var="post" items="${post }">
+				<div class="card border rounded mt-3">
+					<div class="d-flex justify-content-between p-2 border-bottom">
+					
+					<h5 class="font-weight-bold">${post.userName }</h5><br>
+					</div>
+					<div>
+						<img width="600px" height="600px" src="${post.imagePath }">
+					</div>
+					
+					<!-- 좋아요 -->
+					<div class="m-2">
+						<a href="#" class="likeBtn" data-post-id="${post.id }"><i class="bi bi-heart heart-icon text-dark"></i></a>
+						<span class="middle-size ml-1"> 개</span>
+					</div>
+					<div class="mx-3">
+						${post.content}
+					</div>
+					<div class="mt-2">
+						<div class=" border-bottom m-2">
+							<div  class="middle-size">댓글</div>
+						</div>
+						<c:forEach var="com" items="${comment }">
+							<label>${com.userName }</label><input type="text" value="${com.comment }">
+						</c:forEach>
+						<div class="d-flex mt-2 border-top">
+							<input type="text" class="form-control border-0" id="commentInput${post.id }">
+							<button type="button" data-post-id="${post.id }" class="btn btn-info mx-3 ml-3 commentBtn">댓글</button>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
 			</div>
-			<br>
-			<label>댓글</label>
-			<c:forEach var="com" items="${comment }">
-				<label>${com.userName }</label><input type="text" value="${com.comment }">
-			</c:forEach>
-			<input type="text" class="form-control border-0" id="commentInput${post.id }">
-			<button type="button" data-post-id="${post.id }" class="btn btn-info ml-2 commentBtn">댓글</button><br>
-		</c:forEach>
 		</div>
 		</section>
 		
