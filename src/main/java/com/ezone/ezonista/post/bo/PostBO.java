@@ -28,10 +28,12 @@ public class PostBO {
 		
 		return postDAO.showTimeline();
 	}
+	
 	/*
 	public List<PostDetail> getPostList() {
 		
 		List<Post> postList = postDAO.showTimeline();
+		
 	}
 */
 }

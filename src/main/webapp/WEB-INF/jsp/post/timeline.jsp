@@ -13,6 +13,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	
 	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <body>
 
 	<div id="wrap">
@@ -24,6 +25,12 @@
 			<label class="bg-primary">${post.userName }</label><br>
 			<img width="600px" height="600px" src="${post.imagePath }">
 			<textarea class="form-control mt-3" rows="5" cols="10" id="contentInput">${post.content}</textarea>
+			<br>
+			<div class="m-2">
+				<a href="#" class="likeBtn" data-post-id="${post.id }"><i class="bi bi-heart heart-icon text-dark"></i></a>
+						
+				<span class="middle-size ml-1"> 개</span>
+			</div>
 			<br>
 			<label>댓글</label>
 			<c:forEach var="com" items="${comment }">
@@ -70,6 +77,33 @@
 					}
 					
 				});
+			});
+			
+			$(".likeBtn").on("click", function(e) {
+				e.preventDefault();
+				
+				let postId = $(this).data("post-id");
+				
+				
+				$.ajax({
+					type:"get",
+					url:"/post/like",
+					data:{"postId":postId},
+					success:function(data) {
+						
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("좋아요 실패");
+						}
+					},
+					error:function() {
+						alert("좋아요 에러");
+					}
+					
+				});
+				
+				
 			});
 		});
 	</script>

@@ -2,13 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ezone.ezonista.post.dao.PostDAO">
-	<select id="selectLikeCount" parameterType="int" resultType="int">
-		SELECT
-			count(1)
-		FROM
-			`like`
-		WHERE
-			`postId` = #{postId}
-	</select>
+<mapper namespace="com.ezone.ezonista.post.like.dao.LikeDAO">
+	<insert id="addLike" parameterType="map">
+		INSERT INTO `like`
+			(
+				`postId`
+				,`userId`
+				,`createdAt`
+			)
+		VALUE
+			(
+				#{postId}
+				,#{userId}
+				,now()
+			)
+	</insert>
 </mapper>
