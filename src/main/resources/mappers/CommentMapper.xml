@@ -25,5 +25,19 @@
 				,now()
 			)
 	</insert>
+	<select id="getCommentList" parameterType="int" resultType="com.ezone.ezonista.post.comment.model.Comment">
+		SELECT
+				`id`
+				,`postId`
+				,`userId`
+				,`userName`
+				,`comment`
+				,`createdAt`
+				,`updatedAt`
+		FROM
+				`comment`
+		WHERE
+				`postId` = #{postId}
+	</select>
 
 </mapper>

@@ -17,4 +17,22 @@
 				,now()
 			)
 	</insert>
+	
+	<select id="getLikeCount" parameterType="int" resultType="int">
+		SELECT
+				count(1)
+		FROM
+				`like`
+		WHERE
+				`postId` = #{postId}
+	</select>
+	<select id="selectLikeCountByUserId" parameterType="map" resultType="int">
+		SELECT
+				count(1)
+		FROM
+				`like`
+		WHERE
+				`postId` = #{postId}
+				AND `userId` = #{userId}
+ 	</select>
 </mapper>

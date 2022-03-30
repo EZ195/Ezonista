@@ -17,5 +17,9 @@ public class CommentBO {
 	public int commentCreate(int postId, int userId, String userName, String comment) {
 		return commentDAO.commentCreate(postId, userId, userName, comment);
 	}
+	
+	public List<Comment> getCommentList(int postId) {
+		return commentDAO.getCommentList(postId);
+	}
 
 }

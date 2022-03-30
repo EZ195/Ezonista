@@ -26,39 +26,45 @@
 			<div class="w-75 my-5 ">
 			<div>
 				<c:forEach var="post" items="${post }">
-				<div class="card border rounded mt-3">
-					<div class="d-flex justify-content-between p-2 border-bottom">
-					
-					<h5 class="font-weight-bold">${post.userName }</h5><br>
-					</div>
-					<div>
-						<img width="600px" height="600px" src="${post.imagePath }">
-					</div>
-					
-					<!-- 좋아요 -->
-					<div class="m-2">
-						<a href="#" class="likeBtn" data-post-id="${post.id }"><i class="bi bi-heart heart-icon text-dark"></i></a>
-						<span class="middle-size ml-1"> 개</span>
-					</div>
-					<div class="mx-3">
-						${post.content}
-					</div>
-					<div class="mt-2">
-						<div class=" border-bottom m-2">
-							<div  class="middle-size">댓글</div>
+					<div class="card border rounded mt-3">
+						<div class="d-flex justify-content-between p-2 border-bottom">
+							<h5 class="font-weight-bold">${post.userName }</h5><br>
 						</div>
-						<c:forEach var="com" items="${comment }">
-							<label>${com.userName }</label><input type="text" value="${com.comment }">
-						</c:forEach>
+						<div>
+							<img width="600px" height="600px" src="${post.imagePath }">
+						</div>
+						<!-- 좋아요 -->
+						<div class="m-2">
+						<c:choose>
+							<c:when test="${postDetail.like }">
+							<%-- 좋아요 눌리면 빨간 하트로 변함 --%>
+								<i class="bi bi-heart-fill heart-icon text-danger"></i>
+							</c:when>
+							<c:otherwise>
+								<a href="#" class="likeBtn" data-post-id="${post.id }"><i class="bi bi-heart heart-icon text-dark"></i></a>								
+							</c:otherwise>
+						</c:choose>
+						<span class="middle-size ml-1">${postDetail.likeCount} 개</span>
+						</div>
+						
+						<div class="mx-3">
+							${postDetail.post.content}
+						</div>
+						<div  class="middle-size m-2">
+							<c:forEach var="comment" items="${postDetail.commentList }">
+								<div class="mt-1">
+									<b>${comment.userName }</b><input type="text" value="${comment.comment }">						
+								</div>
+							</c:forEach>
+						</div>
 						<div class="d-flex mt-2 border-top">
-							<input type="text" class="form-control border-0" id="commentInput${post.id }">
-							<button type="button" data-post-id="${post.id }" class="btn btn-info mx-3 ml-3 commentBtn">댓글</button>
+							<input type="text" class="form-control border-0" id="commentInput${postDetail.post.id }">
+							<button type="button" data-post-id="${postDetail.post.id }" class="btn btn-info mx-3 ml-3 commentBtn">댓글</button>
 						</div>
 					</div>
-				</div>
 				</c:forEach>
 			</div>
-		</div>
+			</div>
 		</section>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
