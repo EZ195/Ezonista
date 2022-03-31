@@ -39,7 +39,7 @@
 						<c:choose>
 							<c:when test="${postDetail.like }">
 							<%-- 좋아요 눌리면 빨간 하트로 변함 --%>
-								<i class="bi bi-heart-fill heart-icon text-danger"></i>
+								<a href="#" class="unlikeBtn" data-post-id="${postDetail.post.id }"><i class="bi bi-heart-fill heart-icon text-danger " ></i></a>
 							</c:when>
 							<c:otherwise>
 								<a href="#" class="likeBtn" data-post-id="${postDetail.post.id }"><i class="bi bi-heart heart-icon text-dark"></i></a>								
@@ -79,7 +79,7 @@
 				<a href="#" >삭제하시겠습니다까? </a>
 			</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">삭제하기</button>
+					<button type="button" id="deleteBtn" class="btn btn-primary">삭제하기</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">돌아가기</button>
 				</div>
 			</div>
@@ -143,8 +143,28 @@
 					}
 					
 				});
+			});
+			
+			$(".unlikeBtn").on("click",function(){
 				
+				let postId = $(this).data("post-id");
 				
+				$.ajax({
+					type:"get",
+					url:"/post/unlike",
+					data:{"postId":postId},
+					success:function(data){
+						if(data.result == "success") {
+							location.reload();
+						}
+						else {
+							alert("좋아요 취소 실패")
+						}
+					},
+					error:function(){
+						
+					}
+				});
 			});
 		});
 	</script>
