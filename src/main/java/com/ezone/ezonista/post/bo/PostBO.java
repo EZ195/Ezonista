@@ -59,6 +59,7 @@ public class PostBO {
 			boolean isLike = likeBO.isLike(post.getId(), userId);
 			
 			PostDetail postDetail = new PostDetail();
+			
 			postDetail.setPost(post);
 			postDetail.setLikeCount(likeCount);
 			postDetail.setCommentList(commentList);
