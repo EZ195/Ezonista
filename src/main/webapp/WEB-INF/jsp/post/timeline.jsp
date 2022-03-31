@@ -25,13 +25,14 @@
 		<section class="d-flex justify-content-center">
 			<div class="w-75 my-5 ">
 			<div>
-				<c:forEach var="post" items="${post }">
+				<c:forEach var="postDetail" items="${postList }">
 					<div class="card border rounded mt-3">
 						<div class="d-flex justify-content-between p-2 border-bottom">
-							<h5 class="font-weight-bold">${post.userName }</h5><br>
+							<h5 class="font-weight-bold">${postDetail.post.userName }</h5><br>
+							<a href="#" class="text-dark" data-toggle="modal" data-target="#moreModal"><i class="bi bi-three-dots"></i></a>
 						</div>
 						<div>
-							<img width="600px" height="600px" src="${post.imagePath }">
+							<img width="600px" height="600px" src="${postDetail.post.imagePath }">
 						</div>
 						<!-- 좋아요 -->
 						<div class="m-2">
@@ -41,7 +42,7 @@
 								<i class="bi bi-heart-fill heart-icon text-danger"></i>
 							</c:when>
 							<c:otherwise>
-								<a href="#" class="likeBtn" data-post-id="${post.id }"><i class="bi bi-heart heart-icon text-dark"></i></a>								
+								<a href="#" class="likeBtn" data-post-id="${postDetail.post.id }"><i class="bi bi-heart heart-icon text-dark"></i></a>								
 							</c:otherwise>
 						</c:choose>
 						<span class="middle-size ml-1">${postDetail.likeCount} 개</span>
@@ -66,8 +67,23 @@
 			</div>
 			</div>
 		</section>
-		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="moreModal">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+	     
+			<div class="modal-body text-center">
+				<a href="#" >삭제하시겠습니다까? </a>
+			</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">삭제하기</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">돌아가기</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<script>
