@@ -29,7 +29,7 @@
 					<div class="card border rounded mt-3">
 						<div class="d-flex justify-content-between p-2 border-bottom">
 							<h5 class="font-weight-bold">${postDetail.post.userName }</h5><br>
-							<a href="#" class="text-dark" data-toggle="modal" data-target="#moreModal"><i class="bi bi-three-dots"></i></a>
+							<a href="#" class="text-dark" id="deletePost" data-post-id="${postDetail.post.id }" data-toggle="modal" data-target="#moreModal"><i class="bi bi-three-dots"></i></a>
 						</div>
 						<div>
 							<img width="600px" height="600px" src="${postDetail.post.imagePath }">
@@ -163,6 +163,29 @@
 					},
 					error:function(){
 						
+					}
+				});
+			});
+			
+			$("#deleteBtn").on("click" , function(){
+				
+				let postId = $("#deletePost").data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/delete",
+					data:{"postId":postId},
+					success:function(data){
+						if(data.result == "success") {
+							alert("삭제 성공");
+							location.reload();
+						}
+						else {
+							alert("삭제 실패");
+						}
+					},
+					error:function(){
+						alert("에러 발생");
 					}
 				});
 			});

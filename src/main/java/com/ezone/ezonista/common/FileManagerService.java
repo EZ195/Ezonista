@@ -52,4 +52,44 @@ public class FileManagerService {
 		return "/images/" + directoryName + file.getOriginalFilename();
 		
 	}
+	
+	// 파일 및 파일 디렉토리 삭제
+	
+	public static boolean removeFile(String filePath) {
+		
+		if(filePath == null) {
+			logger.error("FileManagerService-removeFile : 파일 삭제 실패");
+			return false;
+		}
+		
+		String realFilePath = FILE_UPLOAD_PATH + filePath.replace("/images/" , "");
+		
+		Path path = Paths.get(realFilePath);
+		
+		if (Files.exists(path)) {
+			
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				logger.error("FileMangerService-removeFile : 파일 삭제 실패");
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		path = path.getParent();
+		
+		if(Files.exists(path)) {
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				logger.error("FileManagerService-removeFile : 디렉토리 삭제 실패");
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 }

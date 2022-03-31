@@ -71,6 +71,14 @@ public class PostBO {
 		return postDetailList;
 		
 	}
+	
+	public  List<PostDetail> deletePostList(int postId, int userId) {
+		
+		List<PostDetail> postList = this.getPostList(postId);
 
+		FileManagerService.removeFile(postList.get(imagePath));
+		
+		return postDAO.deletePost(postId, userId);
+	}
 	
 }

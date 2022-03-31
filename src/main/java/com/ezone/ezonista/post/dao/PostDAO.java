@@ -17,5 +17,9 @@ public interface PostDAO {
 			@Param("filePath") String filePath);
 	
 	public List<Post> showTimeline();
+	
+	public int deletePost(
+			@Param("postId") int postId,
+			@Param("userId") int userId);
 
 }
