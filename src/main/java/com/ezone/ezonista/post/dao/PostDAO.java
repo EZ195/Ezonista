@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ezone.ezonista.post.model.Post;
+import com.ezone.ezonista.post.model.PostDetail;
 
 @Repository
 public interface PostDAO {
@@ -19,7 +20,7 @@ public interface PostDAO {
 	public List<Post> showTimeline();
 	
 	public int deletePost(
-			@Param("postId") int postId,
-			@Param("userId") int userId);
-
+			@Param("postId") int postId);
+	
+	public Post selectPost(@Param("postId") int postId);
 }

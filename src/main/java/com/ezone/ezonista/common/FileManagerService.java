@@ -58,7 +58,7 @@ public class FileManagerService {
 	public static boolean removeFile(String filePath) {
 		
 		if(filePath == null) {
-			logger.error("FileManagerService-removeFile : 파일 삭제 실패");
+			logger.error("FileManagerService-removeFile : 파일 없음");
 			return false;
 		}
 		

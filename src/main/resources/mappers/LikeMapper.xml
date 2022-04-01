@@ -38,13 +38,16 @@
  	</select>
  	
  	<delete id="deleteLike" parameterType="map">
- 	
  		DELETE FROM 
  				`like`
  		WHERE
  				`postId` = #{postId}
 				AND `userId` = #{userId}
- 	
- 	
+ 	</delete>
+ 	<delete id="deleteLikeList" parameterType="int">
+ 		DELETE FROM 
+ 				`like`
+ 		WHERE
+ 				`postId` = #{postId}
  	</delete>
 </mapper>

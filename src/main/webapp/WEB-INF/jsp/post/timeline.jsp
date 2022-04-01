@@ -169,14 +169,15 @@
 			
 			$("#deleteBtn").on("click" , function(){
 				
-				let postId = $("#deletePost").data("post-id");
-				
+				let postId = $("this").data("post-id");
+
 				$.ajax({
 					type:"get",
 					url:"/post/delete",
 					data:{"postId":postId},
 					success:function(data){
 						if(data.result == "success") {
+							
 							alert("삭제 성공");
 							location.reload();
 						}

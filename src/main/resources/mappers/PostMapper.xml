@@ -42,6 +42,11 @@
 				`post`
 		WHERE
 				`id` = #{postId}
-				AND `userId` = #{userId}
 	</delete>
+	<select id="selectPost" parameterType="int" resultType="com.ezone.ezonista.post.model.Post">
+		select
+				`id`
+		FROM
+				`post`
+	</select>
 </mapper>

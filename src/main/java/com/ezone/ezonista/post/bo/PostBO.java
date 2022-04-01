@@ -1,6 +1,7 @@
 package com.ezone.ezonista.post.bo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.ezone.ezonista.post.dao.PostDAO;
 import com.ezone.ezonista.post.like.bo.LikeBO;
 import com.ezone.ezonista.post.model.Post;
 import com.ezone.ezonista.post.model.PostDetail;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 @Service
 public class PostBO {
@@ -72,13 +74,29 @@ public class PostBO {
 		
 	}
 	
-	public  List<PostDetail> deletePostList(int postId, int userId) {
+	public int deletePostDetail(int postId, int userId) {
 		
-		List<PostDetail> postList = this.getPostList(postId);
-
-		FileManagerService.removeFile(postList.get(imagePath));
+		// postId 로 Post 객체 얻어오기
+		Post post = postDAO.selectPost(postId);
 		
-		return postDAO.deletePost(postId, userId);
+		if(post.getUserId() == userId) {
+			// 파일 삭제
+			FileManagerService.removeFile(post.getImagePath());
+			
+			// 댓글 삭제
+			commentBO.deleteCommentList(postId);
+			
+			// 좋아요 삭제
+			likeBO.deleteLikeList(postId);
+			return postDAO.deletePost(postId);
+		}
+		
+		return 0;
+		
+		
 	}
+	
+	
+	
 	
 }

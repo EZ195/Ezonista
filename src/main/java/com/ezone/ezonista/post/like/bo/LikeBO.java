@@ -37,7 +37,10 @@ public class LikeBO {
 	public int unlike(int postId, int userId) {
 		
 		return likeDAO.deleteLike(postId, userId);
-		
+	}
+	
+	public int deleteLikeList(int postId) {
+		return likeDAO.deleteLikeList(postId);
 	}
 
 }

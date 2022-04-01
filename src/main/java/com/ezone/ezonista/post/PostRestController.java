@@ -2,6 +2,7 @@ package com.ezone.ezonista.post;
 
 import java.nio.file.FileSystemNotFoundException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ezone.ezonista.post.bo.PostBO;
+import com.ezone.ezonista.post.model.PostDetail;
 
 @RestController
 @RequestMapping("/post")
@@ -57,8 +59,7 @@ public class PostRestController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = postBO.deletePostList(postId, userId);
-		
+		int count = postBO.deletePostDetail(postId, userId);
 		Map<String, String> result = new HashMap<>();
 		
 		if(count == 1) {
