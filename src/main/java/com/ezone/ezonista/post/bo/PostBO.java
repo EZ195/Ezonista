@@ -88,6 +88,7 @@ public class PostBO {
 			
 			// 좋아요 삭제
 			likeBO.deleteLikeList(postId);
+			
 			return postDAO.deletePost(postId);
 		}
 		

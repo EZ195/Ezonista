@@ -30,20 +30,22 @@ public class PermissionInterceptor implements HandlerInterceptor{
 			if(uri.startsWith("/post")) {
 				
 				// 로그인 하라는 알람창 띄우기
-				response.setContentType("text/html; charset=UTF-8");
+				// response.setContentType("text/html; charset=UTF-8");
 				
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('로그인 후 이용해 주세요');"
-						+ "location.href='/user/signin_view';</script>");
-				out.flush();
+				// PrintWriter out = response.getWriter();
+				// out.println("<script>alert('로그인 후 이용해 주세요');"
+				//		+ "location.href='/user/signin_view';</script>");
+				// out.close();
 				
-				// response.sendRedirect("/user/signin_view");
+				response.sendRedirect("/user/signin_view");
 				return false;
 			}
 		}
 		else {
-			response.sendRedirect("/post/list_view");
-			return false;
+			if(uri.startsWith("/user") && !uri.startsWith("/user/sign_out")) {
+				response.sendRedirect("/post/timeline");
+				return false;
+			}
 		}
 		
 		return true;

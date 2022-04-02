@@ -37,16 +37,25 @@
 				`post`
 	</select>
 	
-	<delete id="deletePost" parameterType="map">
+	<delete id="deletePost">
 		DELETE FROM
 				`post`
 		WHERE
 				`id` = #{postId}
 	</delete>
+	
 	<select id="selectPost" parameterType="int" resultType="com.ezone.ezonista.post.model.Post">
 		select
 				`id`
+				, `userId`
+				, `userName`
+				, `content`
+				, `imagePath`
+				, `createdAt`
+				, `updatedAt`
 		FROM
 				`post`
+		WHERE
+				`id` = #{postId}
 	</select>
 </mapper>

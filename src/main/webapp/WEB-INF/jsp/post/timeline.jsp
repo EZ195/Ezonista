@@ -29,7 +29,7 @@
 					<div class="card border rounded mt-3">
 						<div class="d-flex justify-content-between p-2 border-bottom">
 							<h5 class="font-weight-bold">${postDetail.post.userName }</h5><br>
-							<a href="#" class="text-dark" id="deletePost" data-post-id="${postDetail.post.id }" data-toggle="modal" data-target="#moreModal"><i class="bi bi-three-dots"></i></a>
+							<a href="#" class="text-dark deletepost" data-post-id="${postDetail.post.id }" data-toggle="modal" data-target="#moreModal"><i class="bi bi-three-dots"></i></a>
 						</div>
 						<div>
 							<img width="600px" height="600px" src="${postDetail.post.imagePath }">
@@ -167,10 +167,18 @@
 				});
 			});
 			
-			$("#deleteBtn").on("click" , function(){
+			$(".deletepost").on("click" , function(e) {
+				e.preventDefault();
 				
 				let postId = $(this).data("post-id");
 				
+				$("#deleteBtn").data("postId" , postId);
+			});
+			
+			$("#deleteBtn").on("click" , function(e){
+				e.preventDefault();
+				
+				let postId = $(this).data("post-id");				
 
 				$.ajax({
 					type:"get",
