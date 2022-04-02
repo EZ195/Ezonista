@@ -169,7 +169,8 @@
 			
 			$("#deleteBtn").on("click" , function(){
 				
-				let postId = $("this").data("post-id");
+				let postId = $(this).data("post-id");
+				
 
 				$.ajax({
 					type:"get",
