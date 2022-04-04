@@ -4,14 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezone.ezonista.common.EncryptUtills;
+import com.ezone.ezonista.post.model.Post;
 import com.ezone.ezonista.user.dao.UserDAO;
 import com.ezone.ezonista.user.model.User;
+import com.ezone.ezonista.user.profile.bo.ProfileBO;
 
 @Service
 public class UserBO {
 	
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private ProfileBO profileBO;
+	
+	User user;
 	
 	public int addUser(
 			String loginId, 
@@ -20,7 +26,7 @@ public class UserBO {
 			String email) {
 		
 		String encryptPassword = EncryptUtills.md5(password);
-		
+
 		return userDAO.addUser(loginId, encryptPassword, name, email);
 	}
 	
