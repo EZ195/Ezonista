@@ -14,20 +14,23 @@ public class UserBO {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
 	@Autowired
 	private ProfileBO profileBO;
-	
-	User user;
-	
-	public int addUser(
-			String loginId, 
-			String password, 
-			String name, 
-			String email) {
-		
-		String encryptPassword = EncryptUtills.md5(password);
 
-		return userDAO.addUser(loginId, encryptPassword, name, email);
+	
+	public int addUser(User user) {
+		
+	
+		String encryptPassword = EncryptUtills.md5(user.getPassword());
+		user.setPassword(encryptPassword);
+		userDAO.addUser(user);
+
+		int userId = user.getId();
+		String userLoginId = user.getLoginId();
+		String name = user.getName();
+
+		return profileBO.addProfile(userId, userLoginId, name);
 	}
 	
 	public User login(String loginId, String password) {

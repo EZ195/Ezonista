@@ -54,7 +54,7 @@
 						<div  class="middle-size m-2">
 							<c:forEach var="comment" items="${postDetail.commentList }">
 								<div class="mt-1">
-									<b>${comment.userName }</b><input type="text" value="${comment.comment }">						
+									<b>${comment.userName }</b>${comment.comment }						
 								</div>
 							</c:forEach>
 						</div>
@@ -145,7 +145,8 @@
 				});
 			});
 			
-			$(".unlikeBtn").on("click",function(){
+			$(".unlikeBtn").on("click",function(e){
+				e.preventDefault();
 				
 				let postId = $(this).data("post-id");
 				

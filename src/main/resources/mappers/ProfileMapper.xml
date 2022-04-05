@@ -3,20 +3,41 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ezone.ezonista.user.profile.dao.ProfileDAO">
+
 	<insert id="addProfile" parameterType="map">
-		INSERT `profile`
-			(
-				`userId`
+			INSERT INTO `profile`
+				(
+					`userId`
+					,`userLoginId`
+					,`userName`
+					,`createdAt`
+					,`updatedAt`
+				)
+			
+			VALUE
+				(
+					#{userId}
+					,#{userLoginId}
+					,#{userName}
+					,now()
+					,now()
+				)
+	
+	</insert>
+	<select id="getProfile" parameterType="int" resultType="com.ezone.ezonista.user.profile.model.Profile">
+		SELECT
+				`id`
+				,`userId`
+				,`userLoginId`
 				,`userName`
+				,`introduce`
+				,`profileImagePath`
 				,`createdAt`
 				,`updatedAt`
-			)
-		VALUE
-			(
-				#{userId}
-				,#{userName}
-				,now()
-				,now()
-			)
-	</insert>
+		FROM
+				`profile`
+		WHERE
+				`userId` = #{userId}
+	</select>
+
 </mapper>

@@ -25,17 +25,10 @@ public class UserRestController {
 	private UserBO userBO;
 	
 	@PostMapping("/sign_up")
-	public Map<String, String> signUp(
-			@RequestParam("loginId") String loginId,
-			@RequestParam("password") String password,
-			@RequestParam("name") String name,
-			@RequestParam("email") String email,
-			Model model) {
+	public Map<String, String> signUp(User user) {		
 		
-		model.getAttribute("id");
-		
-		
-		int count = userBO.addUser(loginId, password, name, email);
+		int count = userBO.addUser(user);
+		System.out.println(count);
 		
 		Map<String , String> result = new HashMap<>();
 		
@@ -57,6 +50,7 @@ public class UserRestController {
 			HttpServletRequest request) {
 		
 		User user = userBO.login(loginId, password);
+		
 		
 		Map<String, String> result = new HashMap<>();
 		

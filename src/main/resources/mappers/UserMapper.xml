@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ezone.ezonista.user.dao.UserDAO">
 
-	<insert id="addUser" parameterType="map" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	<insert id="addUser" parameterType="com.ezone.ezonista.user.model.User" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO `user`
 			(
 				`loginId`
