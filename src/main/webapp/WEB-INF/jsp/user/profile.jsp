@@ -21,12 +21,15 @@
 		
 		<section class="d-flex justify-content-center">
 		<div class="w-75 my-5">
+		<a href="">수정</a>
 			<!-- userId -->
-			프사 <h5>아이디</h5>
+			<h5>${profile.userLoginId }</h5>
+			<!-- 프로필 이미지 -->
+			<img src="${profile.profileImagePath }">
 			<!-- userName -->
-			<h5>닉네임</h5>
+			<h5>${profile.userName }</h5>
 			<!-- introduce -->
-			<h5>자기소개</h5>
+			<h5>${profile.introduce }</h5>
 			<hr>
 			<!-- 내가 올린 사진들 -->
 			사진 1 사진 2 사진 3
