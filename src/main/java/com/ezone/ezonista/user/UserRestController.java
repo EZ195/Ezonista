@@ -28,7 +28,6 @@ public class UserRestController {
 	public Map<String, String> signUp(User user) {		
 		
 		int count = userBO.addUser(user);
-		System.out.println(count);
 		
 		Map<String , String> result = new HashMap<>();
 		
